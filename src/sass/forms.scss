@@ -1,0 +1,21 @@
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    font-size: 12px;
+}
+
+.form-element {
+    transition: border .3s ease;
+    display: block;
+    margin-bottom: 15px;
+    background: #fff;
+    border: 2px solid #ccc;
+    height: 36px;
+    padding: 5px 10px;
+    width: 100%;
+
+    &:focus {
+        border-color: #84c69b;
+    }
+}

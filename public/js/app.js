@@ -14619,7 +14619,8 @@ module.exports = {
     signIn: function signIn() {
       var _this = this;
 
-      this.$http.post('http://adr.dev/login', { email: this.email, pass: this.password }).then(function (resp) {
+      var payload = { email: this.email, pass: this.password };
+      this.$http.post('http://adr.dev/login', payload).then(function (resp) {
         _this.$dispatch('signedIn', resp.data.token);
       }, function (resp) {
         console.log('Error occured');
@@ -14628,7 +14629,7 @@ module.exports = {
   }
 };
 if (module.exports.__esModule) module.exports = module.exports.default
-;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n<form class=\"login\" @submit.prevent=\"signIn()\">\n  <header class=\"login__header\">Login</header>\n  <section class=\"login__body\">\n    <label>Email</label>\n    <input class=\"form-element\" type=\"email\" name=\"email\" placeholder=\"Type your email\" v-model=\"email\">\n    <label>Password</label>\n    <input class=\"form-element\" type=\"password\" name=\"password\" placeholder=\"Type your password\" v-model=\"password\">\n    <button class=\"btn btn--confirm\" type=\"submit\">Sign In</button>\n  </section>\n</form>\n"
+;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n<form class=\"login\" @submit.prevent=\"signIn()\">\n  <h2 class=\"login__header\">Welcome back!</h2>\n  <section class=\"login__body\">\n    <label for=\"email\">Email</label>\n    <input id=\"email\" class=\"form-element\" type=\"email\" name=\"email\" v-model=\"email\">\n    <label for=\"pass\">Password</label>\n    <input id=\"pass\" class=\"form-element\" type=\"password\" name=\"password\" v-model=\"password\">\n    <button class=\"btn btn--login\" type=\"submit\">Sign In</button>\n  </section>\n</form>\n"
 if (module.hot) {(function () {  module.hot.accept()
   var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)

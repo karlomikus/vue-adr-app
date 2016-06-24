@@ -1,32 +1,11 @@
+$bg: #28475c;
+$bg-panel: #fff;
+$bg-panel-header: #1a2f4b;
+
 @import 'normalize';
-
-*, *:before, *:after {
-  box-sizing: border-box;
-}
-
-body {
-    background: #3e4149;
-}
-
-label {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: bold;
-    color: #622b2b;
-    font-size: 12px;
-}
-
-.form-element {
-    display: block;
-    margin-bottom: 15px;
-    background: #fff;
-    border: 0;
-    color: #3e4149;
-    height: 40px;
-    padding-left: 15px;
-    padding-right: 15px;
-    width: 100%;
-}
+@import 'core';
+@import 'forms';
+@import 'buttons';
 
 .navigation {
     list-style: none;
@@ -39,13 +18,16 @@ label {
 }
 
 .login {
-    background: #ffc8c8;
+    background: $bg-panel;
+    box-shadow: 0 12px 15px rgba(0,0,0,.4);
+    margin: 40px 0;
 
     .login__header {
-        background: #ff9999;
-        color: #622b2b;
-        padding: 15px 20px;
         font-weight: bold;
+        text-align: center;
+        padding: 20px 0 0 0;
+        margin: 0;
+        display: block;
     }
 
     .login__body {
@@ -54,24 +36,6 @@ label {
 }
 
 .container {
-    width: 900px;
+    width: 300px;
     margin: 0 auto;
-}
-
-.btn {
-    display: inline-block;
-    border: none;
-    background: #000;
-    color: #fff;
-    font-size: 16px;
-    font-weight: bold;
-    padding: 10px 15px;
-    cursor: pointer;
-}
-
-.btn--confirm {
-    background-color: #583c87;
-    &:hover, &:active, &:focus {
-        background-color: #3e1e68;
-    }
 }

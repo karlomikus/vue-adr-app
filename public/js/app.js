@@ -14552,9 +14552,9 @@ var _Login = require('./pages/Login.vue');
 
 var _Login2 = _interopRequireDefault(_Login);
 
-var _Categories = require('./pages/Categories.vue');
+var _Projects = require('./pages/Projects.vue');
 
-var _Categories2 = _interopRequireDefault(_Categories);
+var _Projects2 = _interopRequireDefault(_Projects);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -14564,16 +14564,25 @@ _Vue2.default.use(_vueRouter2.default);
 
 // Initiate router
 var App = _Vue2.default.extend({
+    ready: function ready() {
+        var localToken = localStorage.getItem('token');
+        if (localToken) {
+            this.$route.router.go('/projects');
+        }
+    },
+
     events: {
         signedIn: function signedIn(token) {
             console.log('User logged in!');
+            this.token = token;
+            this.authenticated = true;
             localStorage.setItem('token', token);
         }
     },
     data: function data() {
         return {
-            'token': null,
-            'authenticated': false
+            token: null,
+            authenticated: false
         };
     }
 });
@@ -14582,29 +14591,13 @@ var router = new _vueRouter2.default();
 // Map routes
 router.map({
     '/': { component: _Login2.default },
-    '/categories': { component: _Categories2.default }
+    '/projects': { component: _Projects2.default }
 });
 
 // Run application
 router.start(App, '#app');
 
-},{"./pages/Categories.vue":8,"./pages/Login.vue":9,"Vue":2,"vue-resource":4,"vue-router":5}],8:[function(require,module,exports){
-"use strict";
-
-module.exports = {};
-if (module.exports.__esModule) module.exports = module.exports.default
-;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\nCategories\n"
-if (module.hot) {(function () {  module.hot.accept()
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), true)
-  if (!hotAPI.compatible) return
-  if (!module.hot.data) {
-    hotAPI.createRecord("_v-bb9cd3f2", module.exports)
-  } else {
-    hotAPI.update("_v-bb9cd3f2", module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
-  }
-})()}
-},{"vue":6,"vue-hot-reload-api":3}],9:[function(require,module,exports){
+},{"./pages/Login.vue":8,"./pages/Projects.vue":9,"Vue":2,"vue-resource":4,"vue-router":5}],8:[function(require,module,exports){
 "use strict";
 
 module.exports = {
@@ -14638,6 +14631,43 @@ if (module.hot) {(function () {  module.hot.accept()
     hotAPI.createRecord("_v-539db24e", module.exports)
   } else {
     hotAPI.update("_v-539db24e", module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
+  }
+})()}
+},{"vue":6,"vue-hot-reload-api":3}],9:[function(require,module,exports){
+'use strict';
+
+module.exports = {
+    data: function data() {
+        return {
+            projects: []
+        };
+    },
+    ready: function ready() {
+        this.getProjects();
+    },
+
+    methods: {
+        getProjects: function getProjects() {
+            var _this = this;
+
+            this.$http.get('http://adr.dev/api/v1/projects').then(function (resp) {
+                _this.projects = resp.data;
+            }, function (resp) {
+                alert('error occured');
+            });
+        }
+    }
+};
+if (module.exports.__esModule) module.exports = module.exports.default
+;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n<ul class=\"projects\">\n    <li class=\"projects__item\" v-for=\"project in projects\">\n        <a v-link=\"{ path: '/project/' + project.id }\">\n            {{ project.name }}\n            <small>{{ project.description }}</small>\n        </a>\n    </li>\n</ul>\n"
+if (module.hot) {(function () {  module.hot.accept()
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), true)
+  if (!hotAPI.compatible) return
+  if (!module.hot.data) {
+    hotAPI.createRecord("_v-4d107bb6", module.exports)
+  } else {
+    hotAPI.update("_v-4d107bb6", module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
   }
 })()}
 },{"vue":6,"vue-hot-reload-api":3}]},{},[7]);

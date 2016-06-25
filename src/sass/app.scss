@@ -39,3 +39,35 @@ $bg-panel-header: #1a2f4b;
     width: 300px;
     margin: 0 auto;
 }
+
+.projects {
+    list-style: none;
+    margin: 40px 0;
+    padding: 0;
+
+    .projects__item {
+        a {
+            display: block;
+            background: #fff;
+            margin-bottom: 5px;
+            padding: 15px;
+            font-weight: bold;
+            color: $bg;
+            font-family: 'Scope One', serif;
+            &:hover, &:focus, &:active {
+                color: #fff;
+                background: $bg-panel-header;
+                small {
+                    color: #89a4c8;
+                }
+            }
+            small {
+                display: block;
+                font-weight: normal;
+                color: #545454;
+                margin-top: 15px;
+                font-family: 'Open Sans', sans-serif;
+            }
+        }
+    }
+}

@@ -14556,6 +14556,10 @@ var _Projects = require('./pages/Projects.vue');
 
 var _Projects2 = _interopRequireDefault(_Projects);
 
+var _Project = require('./pages/Project.vue');
+
+var _Project2 = _interopRequireDefault(_Project);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 // Vue Plugins
@@ -14591,13 +14595,14 @@ var router = new _vueRouter2.default();
 // Map routes
 router.map({
     '/': { component: _Login2.default },
-    '/projects': { component: _Projects2.default }
+    '/projects': { component: _Projects2.default },
+    '/project/:id': { component: _Project2.default }
 });
 
 // Run application
 router.start(App, '#app');
 
-},{"./pages/Login.vue":8,"./pages/Projects.vue":9,"Vue":2,"vue-resource":4,"vue-router":5}],8:[function(require,module,exports){
+},{"./pages/Login.vue":8,"./pages/Project.vue":9,"./pages/Projects.vue":10,"Vue":2,"vue-resource":4,"vue-router":5}],8:[function(require,module,exports){
 "use strict";
 
 module.exports = {
@@ -14622,7 +14627,7 @@ module.exports = {
   }
 };
 if (module.exports.__esModule) module.exports = module.exports.default
-;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n<form class=\"login\" @submit.prevent=\"signIn()\">\n  <h2 class=\"login__header\">Welcome back!</h2>\n  <section class=\"login__body\">\n    <label for=\"email\">Email</label>\n    <input id=\"email\" class=\"form-element\" type=\"email\" name=\"email\" v-model=\"email\">\n    <label for=\"pass\">Password</label>\n    <input id=\"pass\" class=\"form-element\" type=\"password\" name=\"password\" v-model=\"password\">\n    <button class=\"btn btn--login\" type=\"submit\">Sign In</button>\n  </section>\n</form>\n"
+;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n<div class=\"container-login\">\n  <form class=\"login\" @submit.prevent=\"signIn()\">\n    <h2 class=\"login__header\">Welcome back!</h2>\n    <section class=\"login__body\">\n      <label for=\"email\">Email</label>\n      <input id=\"email\" class=\"form-element\" type=\"email\" name=\"email\" v-model=\"email\">\n      <label for=\"pass\">Password</label>\n      <input id=\"pass\" class=\"form-element\" type=\"password\" name=\"password\" v-model=\"password\">\n      <button class=\"btn btn--login\" type=\"submit\">Sign In</button>\n    </section>\n  </form>\n  </div>\n"
 if (module.hot) {(function () {  module.hot.accept()
   var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
@@ -14634,6 +14639,46 @@ if (module.hot) {(function () {  module.hot.accept()
   }
 })()}
 },{"vue":6,"vue-hot-reload-api":3}],9:[function(require,module,exports){
+'use strict';
+
+module.exports = {
+    ready: function ready() {
+        this.getProject(this.$route.params.id);
+    },
+    data: function data() {
+        return {
+            project: {
+                name: null,
+                description: null
+            }
+        };
+    },
+
+    methods: {
+        getProject: function getProject(id) {
+            var _this = this;
+
+            this.$http.get('http://adr.dev/api/v1/projects/' + id).then(function (resp) {
+                _this.project = resp.data;
+            }, function (resp) {
+                alert('error occured');
+            });
+        }
+    }
+};
+if (module.exports.__esModule) module.exports = module.exports.default
+;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n<div class=\"container\">\n    <div class=\"project\">\n        <h1 class=\"project__header\">{{ project.name }}</h1>\n        <div class=\"project__body\">\n            {{ project.description }}\n        </div>\n    </div>\n</div>\n"
+if (module.hot) {(function () {  module.hot.accept()
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), true)
+  if (!hotAPI.compatible) return
+  if (!module.hot.data) {
+    hotAPI.createRecord("_v-c8ea9284", module.exports)
+  } else {
+    hotAPI.update("_v-c8ea9284", module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
+  }
+})()}
+},{"vue":6,"vue-hot-reload-api":3}],10:[function(require,module,exports){
 'use strict';
 
 module.exports = {
@@ -14659,7 +14704,7 @@ module.exports = {
     }
 };
 if (module.exports.__esModule) module.exports = module.exports.default
-;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n<ul class=\"projects\">\n    <li class=\"projects__item\" v-for=\"project in projects\">\n        <a v-link=\"{ path: '/project/' + project.id }\">\n            {{ project.name }}\n            <small>{{ project.description }}</small>\n        </a>\n    </li>\n</ul>\n"
+;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n<div class=\"container\">\n    <ul class=\"projects\">\n        <li class=\"projects__item\" v-for=\"project in projects\">\n            <a v-link=\"{ path: '/project/' + project.id }\">\n                {{ project.name }}\n                <small>{{ project.description }}</small>\n            </a>\n        </li>\n    </ul>\n</div>\n"
 if (module.hot) {(function () {  module.hot.accept()
   var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)

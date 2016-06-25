@@ -3,6 +3,7 @@ import VueResource from 'vue-resource';
 import VueRouter from 'vue-router';
 import Login from './pages/Login.vue';
 import Projects from './pages/Projects.vue';
+import Project from './pages/Project.vue';
 
 // Vue Plugins
 Vue.use(VueResource);
@@ -36,7 +37,8 @@ let router = new VueRouter();
 // Map routes
 router.map({
     '/': { component: Login },
-    '/projects': { component: Projects }
+    '/projects': { component: Projects },
+    '/project/:id': { component: Project }
 });
 
 // Run application

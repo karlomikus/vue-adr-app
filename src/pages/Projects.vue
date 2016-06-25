@@ -1,12 +1,14 @@
 <template>
-    <ul class="projects">
-        <li class="projects__item" v-for="project in projects">
-            <a v-link="{ path: '/project/' + project.id }">
-                {{ project.name }}
-                <small>{{ project.description }}</small>
-            </a>
-        </li>
-    </ul>
+    <div class="container">
+        <ul class="projects">
+            <li class="projects__item" v-for="project in projects">
+                <a v-link="{ path: '/project/' + project.id }">
+                    {{ project.name }}
+                    <small>{{ project.description }}</small>
+                </a>
+            </li>
+        </ul>
+    </div>
 </template>
 
 <script>

@@ -35,8 +35,13 @@ $bg-panel-header: #1a2f4b;
     }
 }
 
-.container {
+.container-login {
     width: 300px;
+    margin: 0 auto;
+}
+
+.container {
+    width: 700px;
     margin: 0 auto;
 }
 
@@ -69,5 +74,16 @@ $bg-panel-header: #1a2f4b;
                 font-family: 'Open Sans', sans-serif;
             }
         }
+    }
+}
+
+.project {
+    background: #fff;
+    .project__header {
+        margin: 0;
+        padding: 0;
+    }
+    .project-body {
+        padding: 20px;
     }
 }
